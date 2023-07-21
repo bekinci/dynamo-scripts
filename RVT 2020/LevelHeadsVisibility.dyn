@@ -1,0 +1,393 @@
+{
+  "Uuid": "3c9d0464-8643-5ffe-96e5-ab1769818209",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "DY PL Levels Hide or Show Bubble Left or Right (checkbox on or of)",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [
+    {
+      "Id": "a6ec3d5b66904619a145cb30b4718d58",
+      "Name": "Boolean (True=Left Bubble on, False is Right Bubble on)",
+      "Type": "boolean",
+      "Value": "false",
+      "Description": "Selection between a true and false."
+    }
+  ],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "import clr\nclr.AddReference('RevitAPI')\nfrom Autodesk.Revit.DB import *\nimport Autodesk\n\nclr.AddReference(\"RevitServices\")\nimport RevitServices\nfrom RevitServices.Persistence import DocumentManager\nfrom RevitServices.Transactions import TransactionManager\n\ndoc = DocumentManager.Instance.CurrentDBDocument\nuiapp = DocumentManager.Instance.CurrentUIApplication\napp = uiapp.Application\n\na = UnwrapElement(IN[0])\nv = UnwrapElement(IN[1])\nb = UnwrapElement(IN[2])\nTransactionManager.Instance.EnsureInTransaction(doc)\n\nfor i in a:\n\tif b:\n\t\ti.ShowBubbleInView(DatumEnds.End0,v)\n\t\ti.HideBubbleInView(DatumEnds.End1,v)\n\n\telse:\n\t\ti.HideBubbleInView(DatumEnds.End0,v)\n\t\ti.ShowBubbleInView(DatumEnds.End1,v)\n\nTransactionManager.Instance.TransactionTaskDone()\n\n#Assign your output to the OUT variable.\nOUT = 0",
+      "VariableInputPorts": true,
+      "Id": "74cce9f5c4a24a90bd90841241d6e587",
+      "Inputs": [
+        {
+          "Id": "a657c394eee741bfa69a22285abd586f",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "7446dada803c4ed88018b7bdf646cee2",
+          "Name": "IN[1]",
+          "Description": "Input #1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "7fb32aa8960e4bf796468636af7fffd4",
+          "Name": "IN[2]",
+          "Description": "Input #2",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "5da1b213dec24d5584c30300985d42ce",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
+      "FunctionSignature": "58849545-7510-4baf-99da-98c0b1e184fd",
+      "FunctionType": "Graph",
+      "NodeType": "FunctionNode",
+      "Id": "0ec2f35f2f494e24ba0287a95065a259",
+      "Inputs": [
+        {
+          "Id": "6a94e32897d644eeba60ec558f0e2cef",
+          "Name": "refresh",
+          "Description": "bool\nDefault value : true",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "002e0553f8fa43719d7aad0fed9e0acf",
+          "Name": "view",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Selects the current document's active view. Supports more view types than the built-in option.\r\nWill be depreciated once the bult in node works with all plan types."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": false,
+      "Id": "0cd835177a6d40f4b96eb5953ea22ff6",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "e487541095ee465a9ffa7c665231d062",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Selection between a true and false."
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "import clr\nclr.AddReference('RevitAPI')\nfrom Autodesk.Revit.DB import *\nimport Autodesk\n\nclr.AddReference(\"RevitServices\")\nimport RevitServices\nfrom RevitServices.Persistence import DocumentManager\nfrom RevitServices.Transactions import TransactionManager\n\ndoc = DocumentManager.Instance.CurrentDBDocument\nuiapp = DocumentManager.Instance.CurrentUIApplication\napp = uiapp.Application\n\na = UnwrapElement(IN[0])\nv = UnwrapElement(IN[1])\nTransactionManager.Instance.EnsureInTransaction(doc)\n\nfor i in a:\n\ti.ShowBubbleInView(DatumEnds.End0,v)\n\ti.HideBubbleInView(DatumEnds.End1,v)\nTransactionManager.Instance.TransactionTaskDone()\n\n#Assign your output to the OUT variable.\nOUT = 0",
+      "VariableInputPorts": true,
+      "Id": "c3e7d7b3a7a34de79ebca1172875652a",
+      "Inputs": [
+        {
+          "Id": "8531b8bc8baa4763a29b5a3edd67a454",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "72c028016d8e4a65b66aa0f89c95e627",
+          "Name": "IN[1]",
+          "Description": "Input #1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "a4de401506ee4fd3b12ba5861a0d9f06",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    },
+    {
+      "ConcreteType": "DSRevitNodesUI.Categories, DSRevitNodesUI",
+      "SelectedIndex": 249,
+      "SelectedString": "OST_Levels",
+      "NodeType": "ExtensionNode",
+      "Id": "abcc07ceca434d78940714cdfc1f5648",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "9c8e13e2c9324eb397b9ce9b0fe9f16e",
+          "Name": "Category",
+          "Description": "The selected Category.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "All built-in categories."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "archilab.Revit.Selection.Select.ByCategoryAndView@Revit.Elements.Category,Revit.Elements.Views.View",
+      "Id": "68f86faaccf14702847e5e1f70298274",
+      "Inputs": [
+        {
+          "Id": "64c5709416fb4e06bde95cd1f208adb4",
+          "Name": "category",
+          "Description": "Category to filter for.\n\nCategory",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "cb4608230b0348eeb7d9d8be990c9507",
+          "Name": "view",
+          "Description": "View to filter for.\n\nView",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "b64d223367154abc81b5e4be82b81d28",
+          "Name": "Element",
+          "Description": "Element.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Select Elements by Category and View.\n\nSelect.ByCategoryAndView (category: Category, view: View): Element[]"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": false,
+      "Id": "a6ec3d5b66904619a145cb30b4718d58",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "8ae69750ee684f2caf2ffb718bd0b6d8",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Selection between a true and false."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "002e0553f8fa43719d7aad0fed9e0acf",
+      "End": "7446dada803c4ed88018b7bdf646cee2",
+      "Id": "419fd06be1c748c18299d3a3c4d561f1"
+    },
+    {
+      "Start": "002e0553f8fa43719d7aad0fed9e0acf",
+      "End": "cb4608230b0348eeb7d9d8be990c9507",
+      "Id": "ec792b884510448c89f82555c449c438"
+    },
+    {
+      "Start": "e487541095ee465a9ffa7c665231d062",
+      "End": "6a94e32897d644eeba60ec558f0e2cef",
+      "Id": "7fe4c64bc183481897ff45e5478a84f4"
+    },
+    {
+      "Start": "9c8e13e2c9324eb397b9ce9b0fe9f16e",
+      "End": "64c5709416fb4e06bde95cd1f208adb4",
+      "Id": "bf152a61070249ff94d99cc762475c4d"
+    },
+    {
+      "Start": "b64d223367154abc81b5e4be82b81d28",
+      "End": "a657c394eee741bfa69a22285abd586f",
+      "Id": "e9aac522bbe44ba4b5416d7ab42d1888"
+    },
+    {
+      "Start": "8ae69750ee684f2caf2ffb718bd0b6d8",
+      "End": "7fb32aa8960e4bf796468636af7fffd4",
+      "Id": "5c767751cb7b41329e3917f38f1ce3f5"
+    }
+  ],
+  "Dependencies": [
+    "58849545-7510-4baf-99da-98c0b1e184fd"
+  ],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "spring nodes",
+      "Version": "204.1.0",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "0ec2f35f2f494e24ba0287a95065a259"
+      ]
+    },
+    {
+      "Name": "archi-lab.net",
+      "Version": "2019.2.25",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "68f86faaccf14702847e5e1f70298274"
+      ]
+    }
+  ],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.3.1.11775",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "Id": "74cce9f5c4a24a90bd90841241d6e587",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "Python Script (Toggle between Hide and show Left or Right Level bubble )",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 946.513595034621,
+        "Y": 693.172472048641
+      },
+      {
+        "Id": "0ec2f35f2f494e24ba0287a95065a259",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "Springs.Doc.ActiveView",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 444.282958246042,
+        "Y": 720.487486387309
+      },
+      {
+        "Id": "0cd835177a6d40f4b96eb5953ea22ff6",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "Boolean (change to run again)",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 49.555435648330615,
+        "Y": 730.582334232798
+      },
+      {
+        "Id": "c3e7d7b3a7a34de79ebca1172875652a",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "Python Script (Show Level bubble Left and Hide Level Bubble Right)",
+        "ShowGeometry": true,
+        "Excluded": true,
+        "X": 958.961909733715,
+        "Y": 930.63894957012235
+      },
+      {
+        "Id": "abcc07ceca434d78940714cdfc1f5648",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Name": "Categories (Levels)",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 202.669706447185,
+        "Y": 611.078513121496
+      },
+      {
+        "Id": "68f86faaccf14702847e5e1f70298274",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "Select.ByCategoryAndView",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 679.440159422482,
+        "Y": 617.302670471043
+      },
+      {
+        "Id": "a6ec3d5b66904619a145cb30b4718d58",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Name": "Boolean (True=Left Bubble on, False is Right Bubble on)",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 213.87318967637,
+        "Y": 832.658514765368
+      }
+    ],
+    "Annotations": [],
+    "X": 36.089614538478941,
+    "Y": -344.34579170208053,
+    "Zoom": 1.0542982150113271
+  }
+}

@@ -1,0 +1,879 @@
+{
+  "Uuid": "5941deb1-1168-482b-836e-b195dfee4e29",
+  "IsCustomNode": false,
+  "Description": null,
+  "Name": "CadLinesByLayer&Color",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "CAD.CurvesFromCADLayers@Revit.Elements.Element,string[],bool,string[]",
+      "Id": "64e8046e02444ae3ac7e708d6f09cc72",
+      "Inputs": [
+        {
+          "Id": "7542eb11ce744ecf89f1e6ed72635669",
+          "Name": "importInstance",
+          "Description": "Input the ImportInstance to convert to curves.\n\nElement",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "f25a03b156b141a1a8307b68142c5e79",
+          "Name": "layerNames",
+          "Description": "Enter the layer names for conversion. Leave unconnected to convert all layers. Names are case-sensitive.\n\nstring[]\nDefault value : null",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "f7d1db8ec8764de5a463bbe33fe191b0",
+          "Name": "createModelCurves",
+          "Description": "Set to True to convert into Revit Model Lines.\n\nbool\nDefault value : false",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "15098a5280204cdebda2c6de34a570a5",
+          "Name": "lineStyleMap",
+          "Description": "Enter the LineStyle name to map to each layer. Longest lacing is used by default.\n\nstring[]\nDefault value : null",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "0b47d622db90431daa7d5f4c2cf984f2",
+          "Name": "Curve[][]",
+          "Description": "Curve[][]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "62f396b1a0924458aa5331a10a2ac1d0",
+          "Name": "layerKeys[]",
+          "Description": "string[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Convert curves from a CAD link or import by layer name. Curves are organised into sublists by layer. Enter LineStyle names to map to each layer during conversion.\r\rThe node is optimised to convert curve types that typically fail when using Dynamo Element.Curves node or Revit Explode.\r\rVisit bimorph.com/bimorph-nodes for support.\n\nCAD.CurvesFromCADLayers (importInstance: Element, layerNames: string[] = null, createModelCurves: bool = false, lineStyleMap: string[] = null): var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "CAD.LayerNamesInUse@Revit.Elements.Element",
+      "Id": "e0c3e7c11a2c4c539c9fc4db477e4df7",
+      "Inputs": [
+        {
+          "Id": "a9356af41a03416696b89ff01de9605e",
+          "Name": "importInstance",
+          "Description": "Input the ImportInstance to find layers that are in use.\n\nElement",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": true,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "0470b288df1b4b38a57c193ffb041461",
+          "Name": "layerNames[]",
+          "Description": "string[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "bb5b93302b8a4d5ebb919ff7c90e0258",
+          "Name": "containsCurves[]",
+          "Description": "bool[]\r\rIndices map to the layerNames output. Can be used as a boolean mask.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "42d2f9bbf5cf48c0b437aebeea989b24",
+          "Name": "containsPoints[]",
+          "Description": "bool[]\r\rIndices map to the layerNames output. Can be used as a boolean mask.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "8b7866067ad24c6abbe031cd9c7ff36e",
+          "Name": "containsText[]",
+          "Description": "bool[]\r\rIndices map to the layerNames output. Can be used as a boolean mask.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the list of layer names from a CAD link or import that are in use and contain curves, points, or text.\r\rVisit bimorph.com/bimorph-nodes for support\n\nCAD.LayerNamesInUse (importInstance: Element): var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "CAD.ReportInstances@string,bool,bool",
+      "Id": "cf881e243c6d4dcb93b744af005a73e9",
+      "Inputs": [
+        {
+          "Id": "43dc33afed7f4ee6a63f943caa5809bb",
+          "Name": "filePath",
+          "Description": "Leave unconnected to report the active document or input a File Path to report an external Revit document or Family.\n\nstring\nDefault value : null",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "ca4565da71ab4f068906c80b94e2f28d",
+          "Name": "refresh",
+          "Description": "To refresh, switch a bool input to its opposing state.\n\nbool\nDefault value : true",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "9c59fc4472be441780b8545af5314dde",
+          "Name": "close",
+          "Description": "Set to true to close any external files opened using the filePath input. If the active document is being reported, this input has no effect. Closing disposes all output objects.\n\nbool\nDefault value : false",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "12e431a28fca490b8b5b861ba58dff1c",
+          "Name": "report[][]",
+          "Description": "string[][]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "9fab21a40a7c417bb0b9ce1670d6630e",
+          "Name": "CADLinks[]",
+          "Description": "ImportInstance[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "b8f04620098d42638cad8018546c4cf2",
+          "Name": "CADImports[]",
+          "Description": "ImportInstance[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Generates a report of all CAD links and imports in the document with key metrics. Linked and Imported CAD links are output into lists to aid with CAD link management.\r\rVisit bimorph.com/bimorph-nodes for support\n\nCAD.ReportInstances (filePath: string = null, refresh: bool = true, close: bool = false): var[]..[]"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.Filename, CoreNodeModels",
+      "HintPath": "C:\\Users\\bekinci\\REVIT_LOCAL\\2020\\AR_1712011_SIR_CADLINKS_bekinci_bvn.rvt",
+      "InputValue": "C:\\Users\\bekinci\\REVIT_LOCAL\\2020\\AR_1712011_SIR_CADLINKS_bekinci_bvn.rvt",
+      "NodeType": "ExtensionNode",
+      "Id": "c8ca51de7cc548848241c8f45fb30f44",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "dfeafdaeba9e4e65b8ccea2b789bef57",
+          "Name": "",
+          "Description": "Filename",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows you to select a file on the system to get its filename"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSCore.List.DropItems@var[]..[],int",
+      "Id": "7df809077fad4d1e96ef0412cef8c9b3",
+      "Inputs": [
+        {
+          "Id": "537ec23df65a439d8fd3e06095d9bae0",
+          "Name": "list",
+          "Description": "List to remove items from.\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "4f84366a104647618423e4ea6ca18b1b",
+          "Name": "amount",
+          "Description": "Amount of items to remove. If negative, items are removed from the end of the list.\n\nint",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "f7a5a82374e84ed1b0143ff7917e7a55",
+          "Name": "list",
+          "Description": "List of remaining items.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Removes an amount of items from the start of the list. If the amount is a negative value, items are removed from the end of the list.\n\nList.DropItems (list: var[]..[], amount: int): var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "3;",
+      "Id": "580c05c2b6c941799e745fbc1eb2ff6e",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "b7735a1a6f164937aece27101e83dd57",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"M-Peno3\";",
+      "Id": "90664ab0f3b741158263cd8ed69383e6",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "5f66547139d746fa8fac188100e692c0",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
+      "FunctionSignature": "e0685795-e041-44d2-a4e1-5c95d986647f",
+      "FunctionType": "Graph",
+      "NodeType": "FunctionNode",
+      "Id": "8da12f965d6a4187ae5b80760fc7f578",
+      "Inputs": [
+        {
+          "Id": "f129416f192a47ef93a9b34e9ecb9bde",
+          "Name": "curves",
+          "Description": "var[][]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "2545746081df46a7bd8b3daf8ed88b60",
+          "Name": "baseLevel",
+          "Description": "var[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "4712e5e529d940dd80d86f100a3410b0",
+          "Name": "topLevel",
+          "Description": "var[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "18423ae3645642328d6e7d1d3de56591",
+          "Name": "Opening",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Creates a shaft opening. The top level MUST be higher than the base level for a successful execution. You can either provide one base and top level for all shafts or have unique levels for each shaft instance."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSCore.List.GetItemAtIndex@var[]..[],int",
+      "Id": "99d9aa03d85046b6baebe357833fe66a",
+      "Inputs": [
+        {
+          "Id": "bd555cde54bf453a84a4af260e04ae10",
+          "Name": "list",
+          "Description": "List to fetch an item from.\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "7c435a166c8c407bb0b4d977c77bb519",
+          "Name": "index",
+          "Description": "Index of the item to be fetched.\n\nint",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "8e32601457cc4cd4802ef6a0120f1db3",
+          "Name": "item",
+          "Description": "Item in the list at the given index.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Returns an item from the given list that's located at the specified index.\n\nList.GetItemAtIndex (list: var[]..[], index: int): var[]..[]"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.DoubleSlider, CoreNodeModels",
+      "NodeType": "NumberInputNode",
+      "NumberType": "Double",
+      "MaximumValue": 15.0,
+      "MinimumValue": 0.0,
+      "StepValue": 1.0,
+      "InputValue": 0.0,
+      "Id": "651a8cf9e1b94a77bba1f6b81f543511",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "614c55feb05b415ab043554db4635065",
+          "Name": "",
+          "Description": "Double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "A slider that produces numeric values."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "CAD.SetObjectStyle@Revit.Elements.Element,string,int,DSCore.Color,Revit.Elements.Element",
+      "Id": "ad3b815d9cbe41fcac97ca2d785f51ff",
+      "Inputs": [
+        {
+          "Id": "81093a19d7cb47e5b34eb341452da035",
+          "Name": "importInstance",
+          "Description": "Input the ImportInstance containing the target layers.\n\nElement",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "a14ef6586ae348019aaec554d5de6a5a",
+          "Name": "layerName",
+          "Description": "Input the layer name to update. Names are case-sensitive.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "3e0c3e9fb28343e1ab5ae559106be97b",
+          "Name": "projectionWeight",
+          "Description": "Input the line projection weight.\n\nint",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "5be88aaa21ed4fe0b99490113689bc55",
+          "Name": "color",
+          "Description": "Input a color to map to the CAD layer.\n\nColor",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "9f9d4e0446384e3cbc4f17f180ae573b",
+          "Name": "linePattern",
+          "Description": "Input the required line pattern. Only avaialable for Revit versions 2017 and above. No input defaults to Solid line pattern..\n\nElement\nDefault value : null",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "bdf5f3b0fde443d5a63f081b185bfe33",
+          "Name": "report",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "1156cb6ff91b40aca9786752cbc11d79",
+          "Name": "importInstance",
+          "Description": "ImportInstance",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Set the weight and color of CAD link or import Object Styles (layers).\r\rVisit bimorph.com/bimorph-nodes for support\n\nCAD.SetObjectStyle (importInstance: Element, layerName: string, projectionWeight: int, color: Color, linePattern: Element = null): var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Element.GetParameterValueByName@string",
+      "Id": "dca91645bb22439293c13363b0d648ad",
+      "Inputs": [
+        {
+          "Id": "4b212453ced9465b96f2c7be4f07ac6d",
+          "Name": "element",
+          "Description": "Revit.Elements.Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "c7618fac9dd14f358cf377d939ec39e1",
+          "Name": "parameterName",
+          "Description": "The name of the parameter whose value you want to obtain.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "4190fa0a30884948840db6548efda090",
+          "Name": "var[]..[]",
+          "Description": "var[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the value of one of the element's parameters.\n\nElement.GetParameterValueByName (parameterName: string): var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"Category\";",
+      "Id": "67a541cfb99c47358bd35a5b3d55e178",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "0eeb72b9f31c4350a495701bd9e110d7",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Element.Name",
+      "Id": "45d74ac41372476fabf931ae4188d9cf",
+      "Inputs": [
+        {
+          "Id": "a14d2b18390248faafe220b25bb959c1",
+          "Name": "element",
+          "Description": "Revit.Elements.Element",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "d4cb91b0687a4441b67a73a049a92c3b",
+          "Name": "string",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get the Name of the Element\n\nElement.Name: string"
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Load the Python Standard and DesignScript Libraries\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\n# The inputs to this node will be stored as a list in the IN variables.\r\ndataEnteringNode = IN\r\n\r\n# Place your code below this line\r\n\r\n# Assign your output to the OUT variable.\r\nOUT = 0",
+      "VariableInputPorts": true,
+      "Id": "4c1feee8389f41a8bdcc282c661e55ba",
+      "Inputs": [
+        {
+          "Id": "3807df4a28504dabb94c98e480fd9702",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "86325f94a96740d2a0c9f5825bec6994",
+          "Name": "OUT",
+          "Description": "Result of the python script",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Runs an embedded IronPython script."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "0b47d622db90431daa7d5f4c2cf984f2",
+      "End": "bd555cde54bf453a84a4af260e04ae10",
+      "Id": "7c17ff28672a4690937057ab1a839ece"
+    },
+    {
+      "Start": "9fab21a40a7c417bb0b9ce1670d6630e",
+      "End": "537ec23df65a439d8fd3e06095d9bae0",
+      "Id": "597ab587e1134dccbbc2e160b5fda734"
+    },
+    {
+      "Start": "dfeafdaeba9e4e65b8ccea2b789bef57",
+      "End": "43dc33afed7f4ee6a63f943caa5809bb",
+      "Id": "e56a2c840a4849c28afa01975e3f498a"
+    },
+    {
+      "Start": "f7a5a82374e84ed1b0143ff7917e7a55",
+      "End": "a9356af41a03416696b89ff01de9605e",
+      "Id": "48affc7e39624f25a3d65153f319b1c4"
+    },
+    {
+      "Start": "f7a5a82374e84ed1b0143ff7917e7a55",
+      "End": "7542eb11ce744ecf89f1e6ed72635669",
+      "Id": "296dfa722ac9427f927a2bf99db31b8c"
+    },
+    {
+      "Start": "f7a5a82374e84ed1b0143ff7917e7a55",
+      "End": "81093a19d7cb47e5b34eb341452da035",
+      "Id": "3b394538643b4b44b6ba73cbcea3ff8a"
+    },
+    {
+      "Start": "f7a5a82374e84ed1b0143ff7917e7a55",
+      "End": "4b212453ced9465b96f2c7be4f07ac6d",
+      "Id": "79592aee07df418e8865941c9af28478"
+    },
+    {
+      "Start": "b7735a1a6f164937aece27101e83dd57",
+      "End": "4f84366a104647618423e4ea6ca18b1b",
+      "Id": "2f360d9a41d742ebbce6426b71781d2f"
+    },
+    {
+      "Start": "5f66547139d746fa8fac188100e692c0",
+      "End": "f25a03b156b141a1a8307b68142c5e79",
+      "Id": "8dcfe307fd654e62a1e24cd353fcc2c9"
+    },
+    {
+      "Start": "5f66547139d746fa8fac188100e692c0",
+      "End": "a14ef6586ae348019aaec554d5de6a5a",
+      "Id": "00a6bd6068e8454aad3916ff3fc497c9"
+    },
+    {
+      "Start": "614c55feb05b415ab043554db4635065",
+      "End": "7c435a166c8c407bb0b4d977c77bb519",
+      "Id": "6070237beaa9449da944c6e4e9e141f1"
+    },
+    {
+      "Start": "4190fa0a30884948840db6548efda090",
+      "End": "a14d2b18390248faafe220b25bb959c1",
+      "Id": "824f0cdd07664453a121f01b72aad17b"
+    },
+    {
+      "Start": "0eeb72b9f31c4350a495701bd9e110d7",
+      "End": "c7618fac9dd14f358cf377d939ec39e1",
+      "Id": "633a2ded403645d188c777661f7d6dcc"
+    }
+  ],
+  "Dependencies": [
+    "e0685795-e041-44d2-a4e1-5c95d986647f"
+  ],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "bimorphNodes",
+      "Version": "3.0.3",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "64e8046e02444ae3ac7e708d6f09cc72",
+        "e0c3e7c11a2c4c539c9fc4db477e4df7",
+        "cf881e243c6d4dcb93b744af005a73e9",
+        "ad3b815d9cbe41fcac97ca2d785f51ff"
+      ]
+    },
+    {
+      "Name": "spring nodes",
+      "Version": "204.1.0",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "8da12f965d6a4187ae5b80760fc7f578"
+      ]
+    }
+  ],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.3.2.15696",
+      "RunType": "Automatic",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": 63779.226284899036,
+      "EyeY": 26773.785271481363,
+      "EyeZ": 6958.3063375785387,
+      "LookX": 1537.1116057259642,
+      "LookY": -14519.097771481363,
+      "LookZ": -10680.853212578539,
+      "UpX": 0.093452515563683586,
+      "UpY": 0.75470958022278811,
+      "UpZ": -0.64936898359469286
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": false,
+        "Name": "CAD.CurvesFromCADLayers",
+        "Id": "64e8046e02444ae3ac7e708d6f09cc72",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1129.6693881496121,
+        "Y": 129.205324695495
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "CAD.LayerNamesInUse",
+        "Id": "e0c3e7c11a2c4c539c9fc4db477e4df7",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 667.968883914232,
+        "Y": 293.09917370376718
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "CAD.ReportInstances",
+        "Id": "cf881e243c6d4dcb93b744af005a73e9",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -39.0,
+        "Y": 104.5
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "File Path",
+        "Id": "c8ca51de7cc548848241c8f45fb30f44",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -535.51203448660613,
+        "Y": 103.61886310315879
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "List.DropItems",
+        "Id": "7df809077fad4d1e96ef0412cef8c9b3",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 363.3840123966221,
+        "Y": 125.61866112258039
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "580c05c2b6c941799e745fbc1eb2ff6e",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 363.93490462926991,
+        "Y": 39.81462762519584
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "90664ab0f3b741158263cd8ed69383e6",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 941.71724532818814,
+        "Y": 69.250603197561077
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "ꟿ Opening.ShaftByCurves",
+        "Id": "8da12f965d6a4187ae5b80760fc7f578",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2092.2293394442586,
+        "Y": 241.44244255647024
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "List.GetItemAtIndex",
+        "Id": "99d9aa03d85046b6baebe357833fe66a",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1687.1051348236867,
+        "Y": 242.66103205782952
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Number Slider",
+        "Id": "651a8cf9e1b94a77bba1f6b81f543511",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1402.8357027199811,
+        "Y": 14.302053487907784
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "CAD.SetObjectStyle",
+        "Id": "ad3b815d9cbe41fcac97ca2d785f51ff",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 510.41869914006111,
+        "Y": -248.49145089431855
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Element.GetParameterValueByName",
+        "Id": "dca91645bb22439293c13363b0d648ad",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1125.0116644514333,
+        "Y": -215.09263743947707
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "67a541cfb99c47358bd35a5b3d55e178",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 899.0,
+        "Y": -110.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Element.Name",
+        "Id": "45d74ac41372476fabf931ae4188d9cf",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1449.750262379109,
+        "Y": -208.14428903566994
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Python Script",
+        "Id": "4c1feee8389f41a8bdcc282c661e55ba",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1992.0200793647073,
+        "Y": -45.150643609873669
+      }
+    ],
+    "Annotations": [],
+    "X": 307.23623994151978,
+    "Y": 239.92476054115542,
+    "Zoom": 0.50922842211020036
+  }
+}

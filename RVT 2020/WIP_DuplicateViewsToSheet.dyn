@@ -1,0 +1,216 @@
+{
+  "Uuid": "853fac06-12fe-44cd-bc56-3e51a51e5627",
+  "IsCustomNode": false,
+  "Description": null,
+  "Name": "WIP_DuplicateViewsToSheet",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
+      "FunctionSignature": "eb6f6060-3330-4f6c-b7e1-0628ef900386",
+      "FunctionType": "Graph",
+      "NodeType": "FunctionNode",
+      "Id": "d3c6afabb52d4efb9ccb211fc3fda501",
+      "Inputs": [
+        {
+          "Id": "8ab4712a199c4753903390119e33d822",
+          "Name": "SheetList",
+          "Description": "var[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "3532c9f04a264e2e8badb4e579a0d992",
+          "Name": "ViewsList",
+          "Description": "var[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "16735d10e4de4ea2bea02c598a6a5193",
+          "Name": "PointsList",
+          "Description": "var[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "9b81ba67dbf14db99e757c4e60be4219",
+          "Name": "ViewportsPlaced",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "originally from SteamNodes"
+    },
+    {
+      "ConcreteType": "archilabUI.DuplicateOptionsUi, archilabUI",
+      "SelectedIndex": 2,
+      "SelectedString": "WithDetailing",
+      "NodeType": "ExtensionNode",
+      "Id": "c1678826a1da418281322b542d8da321",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "04799a39f1184d93bc1edee9fd1e791c",
+          "Name": "options",
+          "Description": "The selected options",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Retrieve all available View Duplication Options."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "archilab.Revit.Views.Views.Duplicate@Revit.Elements.Views.View,string,string",
+      "Id": "44b141a376454b2fbefb3acb5c3e4c22",
+      "Inputs": [
+        {
+          "Id": "a8fe9f12383a42e8bf1e7b861c1929e7",
+          "Name": "view",
+          "Description": "View to duplicate.\n\nView",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "bb1be6dda7634cf3acdf78e29a61ed2b",
+          "Name": "name",
+          "Description": "Name to be assigned to new view.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "8e85da0b8eeb40eb8c0e2062ed686add",
+          "Name": "options",
+          "Description": "Duplicate options. Ex: Duplicate as Dependent.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "fa6c98b6e9cc492fa3472b3438bfdf7c",
+          "Name": "view",
+          "Description": "New View.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Duplicates an existing view.\n\nViews.Duplicate (view: View, name: string, options: string): View"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "04799a39f1184d93bc1edee9fd1e791c",
+      "End": "8e85da0b8eeb40eb8c0e2062ed686add",
+      "Id": "c26b325fbef1404a8aae7a382e8b4b35"
+    },
+    {
+      "Start": "fa6c98b6e9cc492fa3472b3438bfdf7c",
+      "End": "3532c9f04a264e2e8badb4e579a0d992",
+      "Id": "8f1051ddd79a460499f9d69fb8d05a23"
+    }
+  ],
+  "Dependencies": [
+    "eb6f6060-3330-4f6c-b7e1-0628ef900386"
+  ],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "archi-lab.net",
+      "Version": "2019.2.25",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "c1678826a1da418281322b542d8da321",
+        "44b141a376454b2fbefb3acb5c3e4c22"
+      ]
+    }
+  ],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.3.2.15696",
+      "RunType": "Automatic",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "bv Place View On Sheet at Point",
+        "Id": "d3c6afabb52d4efb9ccb211fc3fda501",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 847.86951492113826,
+        "Y": 220.79647216716029
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Duplicate Options",
+        "Id": "c1678826a1da418281322b542d8da321",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 241.87756137318027,
+        "Y": 530.48499391295172
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Views.Duplicate",
+        "Id": "44b141a376454b2fbefb3acb5c3e4c22",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 478.48567895014935,
+        "Y": 417.40226174275932
+      }
+    ],
+    "Annotations": [],
+    "X": 18.54431269133795,
+    "Y": 128.13411971222627,
+    "Zoom": 0.910063803931439
+  }
+}

@@ -1,0 +1,527 @@
+{
+  "Uuid": "5941deb1-1168-482b-836e-b195dfee4e29",
+  "IsCustomNode": false,
+  "Description": null,
+  "Name": "WIP_CADPointsToSurface",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "CAD.ReportInstances@string,bool,bool",
+      "Id": "f0ce647c48d54857b5bff3d7d72e68b0",
+      "Inputs": [
+        {
+          "Id": "bfa575111abd4bf0a6ed3bfab5e1b48e",
+          "Name": "filePath",
+          "Description": "Leave unconnected to report the active document or input a File Path to report an external Revit document or Family.\n\nstring\nDefault value : null",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "0f84094850824463bc66255c234c307a",
+          "Name": "refresh",
+          "Description": "To refresh, switch a bool input to its opposing state.\n\nbool\nDefault value : true",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "142e62d35b684862b95f42de7b7de98a",
+          "Name": "close",
+          "Description": "Set to true to close any external files opened using the filePath input. If the active document is being reported, this input has no effect. Closing disposes all output objects.\n\nbool\nDefault value : false",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "4b551df868ae4c579d31e39c70fd3f81",
+          "Name": "report[][]",
+          "Description": "string[][]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "8d36714bb7504bf1966e5d80d9bd302f",
+          "Name": "CADLinks[]",
+          "Description": "ImportInstance[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "6c67fe6f6b5f45cbb809cfde19bb1cab",
+          "Name": "CADImports[]",
+          "Description": "ImportInstance[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Generates a report of all CAD links and imports in the document with key metrics. Linked and Imported CAD links are output into lists to aid with CAD link management.\r\rVisit bimorph.com/bimorph-nodes for support\n\nCAD.ReportInstances (filePath: string = null, refresh: bool = true, close: bool = false): var[]..[]"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.Filename, CoreNodeModels",
+      "HintPath": "C:\\Users\\bekinci\\REVIT_LOCAL\\2020\\AR_1712011_SIR_SIRIUS_bekinci_bvn.rvt",
+      "InputValue": "C:\\Users\\bekinci\\REVIT_LOCAL\\2020\\AR_1712011_SIR_SIRIUS_bekinci_bvn.rvt",
+      "NodeType": "ExtensionNode",
+      "Id": "c0696475e0804ddf85384dd11cb4e881",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "b688b51a2ab64f3ab59a929bcaa6e0d9",
+          "Name": "",
+          "Description": "Filename",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows you to select a file on the system to get its filename"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"30827088\";",
+      "Id": "a683ad5de45849ffb63aee92f2e0800b",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "e42170b435c742b4b6f712e704aef8b3",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSCore.List.LastItem@var[]..[]",
+      "Id": "c5c7fd4b12eb43c8b437a9d0e272c941",
+      "Inputs": [
+        {
+          "Id": "fa8b182b747d4688b0f38b5630b4bdea",
+          "Name": "list",
+          "Description": "List to get the last item of.\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "486bcffba4f4491880cc76efc091bc73",
+          "Name": "last",
+          "Description": "Last item in the list.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Retrieves the last item in a list.\n\nList.LastItem (list: var[]..[]): var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "CAD.PointsFromCADLayers@Revit.Elements.Element,string[]",
+      "Id": "bd08f7287955475991b0c3f38bb89d5b",
+      "Inputs": [
+        {
+          "Id": "764c979707444bd8b62ed07252ed9f9f",
+          "Name": "importInstance",
+          "Description": "Input the ImportInstance to convert to curves.\n\nElement",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "9ac361ae0bff41d29e5196e507ec1200",
+          "Name": "layerNames",
+          "Description": "Enter the layer names for conversion. Leave unconnected to convert all layers. Names are case-sensitive.\n\nstring[]\nDefault value : null",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "4f94c02ab4994668875bb4d7d692bc7e",
+          "Name": "Point[][]",
+          "Description": "Point[][]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "66fa504c229b4231aa82f84724da3b35",
+          "Name": "layerKeys[]",
+          "Description": "string[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Convert points from a CAD link or import to Dynamo Points by layer name. Points are organised into sublists by layer. \r\rVisit bimorph.com/bimorph-nodes for support.\n\nCAD.PointsFromCADLayers (importInstance: Element, layerNames: string[] = null): var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "\"ST_SSL LTS Point Cloud 1m Grid\";",
+      "Id": "12eace64f5c0413bbaedb84a2a391676",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "420ead9dfc34487894387d0ae254918b",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSCore.List.FirstItem@var[]..[]",
+      "Id": "01ff9c565b2046d2992ba55d5c173e89",
+      "Inputs": [
+        {
+          "Id": "8ab908ea65314b48834fe29e93d84cfc",
+          "Name": "list",
+          "Description": "List to get the first item from.\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "29d080d106004888b4c1010e489fc485",
+          "Name": "item",
+          "Description": "First item in the list.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Returns the first item in a list.\n\nList.FirstItem (list: var[]..[]): var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSCore.List.Count@var[]..[]",
+      "Id": "da35ba73ed2c41ae9a32a40cb8c724d8",
+      "Inputs": [
+        {
+          "Id": "f84b56de94f64e8ba189d56e460dd7e0",
+          "Name": "list",
+          "Description": "List to get the item count of.\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "df971bc9386e41b9a47bd102b824ec37",
+          "Name": "count",
+          "Description": "List length.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Returns the number of items stored in the given list.\n\nList.Count (list: var[]..[]): int"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSCore.List.Flatten@var[]..[],int",
+      "Id": "65ee99a7c9234f6286cbac419a42ceed",
+      "Inputs": [
+        {
+          "Id": "76cc9dd1679242f1a5a8382e23fdd49a",
+          "Name": "list",
+          "Description": "List to flatten.\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "a45993c8b6c14f879167c8798fd57ffa",
+          "Name": "amt",
+          "Description": "Layers of nesting to remove.\n\nint\nDefault value : -1",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "b796e3607dcd4f03afd1abdbfc7a5ba0",
+          "Name": "var[]..[]",
+          "Description": "var[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Flattens a nested list of lists by a certain amount.\n\nList.Flatten (list: var[]..[], amt: int = -1): var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "Revit.Elements.Topography.ByPoints@Autodesk.DesignScript.Geometry.Point[]",
+      "Id": "cd2c7668fe604d789bffa880c24dab8c",
+      "Inputs": [
+        {
+          "Id": "8200fd3fc2a9428eb7e2122f3516b60e",
+          "Name": "points",
+          "Description": "The points which define the topography surface.\n\nPoint[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "9546eb67dfba4dca9a3dff6575658ef9",
+          "Name": "Topography",
+          "Description": "A topography surface through the specified points.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Create a topography surface from a list of points.\n\nTopography.ByPoints (points: Point[]): Topography"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "4b551df868ae4c579d31e39c70fd3f81",
+      "End": "fa8b182b747d4688b0f38b5630b4bdea",
+      "Id": "3ec266f291994524959a7e7d05fe8c92"
+    },
+    {
+      "Start": "b688b51a2ab64f3ab59a929bcaa6e0d9",
+      "End": "bfa575111abd4bf0a6ed3bfab5e1b48e",
+      "Id": "1e6eff646f5647b9acc8c88b138d180e"
+    },
+    {
+      "Start": "486bcffba4f4491880cc76efc091bc73",
+      "End": "8ab908ea65314b48834fe29e93d84cfc",
+      "Id": "07d175c2717940c49cd6674d9f6c25f5"
+    },
+    {
+      "Start": "4f94c02ab4994668875bb4d7d692bc7e",
+      "End": "76cc9dd1679242f1a5a8382e23fdd49a",
+      "Id": "5246679e7ff24477bbdd5b4a8beeadad"
+    },
+    {
+      "Start": "420ead9dfc34487894387d0ae254918b",
+      "End": "9ac361ae0bff41d29e5196e507ec1200",
+      "Id": "9fca806137f644739b3c4776960ee38d"
+    },
+    {
+      "Start": "29d080d106004888b4c1010e489fc485",
+      "End": "764c979707444bd8b62ed07252ed9f9f",
+      "Id": "61127db8c3ad47858219604abb591869"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "bimorphNodes",
+      "Version": "3.0.3",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "f0ce647c48d54857b5bff3d7d72e68b0",
+        "bd08f7287955475991b0c3f38bb89d5b"
+      ]
+    }
+  ],
+  "Bindings": [
+    {
+      "NodeId": "cd2c7668-fe60-4d78-9bff-a880c24dab8c",
+      "Binding": {
+        "ByPoints_InClassDecl-1_InFunctionScope-1_Instance0_cd2c7668-fe60-4d78-9bff-a880c24dab8c": "PFNPQVAtRU5WOkVudmVsb3BlIHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiIHhtbG5zOnhzZD0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEiIHhtbG5zOlNPQVAtRU5DPSJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy9zb2FwL2VuY29kaW5nLyIgeG1sbnM6U09BUC1FTlY9Imh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3NvYXAvZW52ZWxvcGUvIiB4bWxuczpjbHI9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vc29hcC9lbmNvZGluZy9jbHIvMS4wIiBTT0FQLUVOVjplbmNvZGluZ1N0eWxlPSJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy9zb2FwL2VuY29kaW5nLyI+DQo8U09BUC1FTlY6Qm9keT4NCjxhMTpDYWxsU2l0ZV94MDAyQl9UcmFjZVNlcmlhbGlzZXJIZWxwZXIgaWQ9InJlZi0xIiB4bWxuczphMT0iaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS9jbHIvbnNhc3NlbS9Qcm90b0NvcmUvUHJvdG9Db3JlJTJDJTIwVmVyc2lvbiUzRDIuMy4yLjE1Njk2JTJDJTIwQ3VsdHVyZSUzRG5ldXRyYWwlMkMlMjBQdWJsaWNLZXlUb2tlbiUzRG51bGwiPg0KPE51bWJlck9mRWxlbWVudHM+MTwvTnVtYmVyT2ZFbGVtZW50cz4NCjxCYXNlLTBfSGFzRGF0YT50cnVlPC9CYXNlLTBfSGFzRGF0YT4NCjxCYXNlLTBfRGF0YSBpZD0icmVmLTMiPlBGTlBRVkF0UlU1V09rVnVkbVZzYjNCbElIaHRiRzV6T25oemFUMGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TVM5WVRVeFRZMmhsYldFdGFXNXpkR0Z1WTJVaUlIaHRiRzV6T25oelpEMGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TVM5WVRVeFRZMmhsYldFaUlIaHRiRzV6T2xOUFFWQXRSVTVEUFNKb2RIUndPaTh2YzJOb1pXMWhjeTU0Yld4emIyRndMbTl5Wnk5emIyRndMMlZ1WTI5a2FXNW5MeUlnZUcxc2JuTTZVMDlCVUMxRlRsWTlJbWgwZEhBNkx5OXpZMmhsYldGekxuaHRiSE52WVhBdWIzSm5MM052WVhBdlpXNTJaV3h2Y0dVdklpQjRiV3h1Y3pwamJISTlJbWgwZEhBNkx5OXpZMmhsYldGekxtMXBZM0p2YzI5bWRDNWpiMjB2YzI5aGNDOWxibU52WkdsdVp5OWpiSEl2TVM0d0lpQlRUMEZRTFVWT1ZqcGxibU52WkdsdVoxTjBlV3hsUFNKb2RIUndPaTh2YzJOb1pXMWhjeTU0Yld4emIyRndMbTl5Wnk5emIyRndMMlZ1WTI5a2FXNW5MeUkrRFFvOFUwOUJVQzFGVGxZNlFtOWtlVDROQ2p4aE1UcFRaWEpwWVd4cGVtRmliR1ZKWkNCcFpEMGljbVZtTFRFaUlIaHRiRzV6T21FeFBTSm9kSFJ3T2k4dmMyTm9aVzFoY3k1dGFXTnliM052Wm5RdVkyOXRMMk5zY2k5dWMyRnpjMlZ0TDFKbGRtbDBVMlZ5ZG1salpYTXVVR1Z5YzJsemRHVnVZMlV2VW1WMmFYUlRaWEoyYVdObGN5VXlReVV5TUZabGNuTnBiMjRsTTBReUxqTXVNaTR4TlRjeU5DVXlReVV5TUVOMWJIUjFjbVVsTTBSdVpYVjBjbUZzSlRKREpUSXdVSFZpYkdsalMyVjVWRzlyWlc0bE0wUnVkV3hzSWo0TkNqeHpkSEpwYm1kSlJDQnBaRDBpY21WbUxUTWlQalZqWW1FNVl6WXpMV0ZrTldFdE5ETXdNeTA1WW1JekxXUXlZamsyTVdObU5XTTNNaTB3TVdRMll6bGpOend2YzNSeWFXNW5TVVErRFFvOGFXNTBTVVErTXpBNE5UTTFOelU4TDJsdWRFbEVQZzBLUEM5aE1UcFRaWEpwWVd4cGVtRmliR1ZKWkQ0TkNqd3ZVMDlCVUMxRlRsWTZRbTlrZVQ0TkNqd3ZVMDlCVUMxRlRsWTZSVzUyWld4dmNHVStEUW89PC9CYXNlLTBfRGF0YT4NCjxCYXNlLTBfSGFzTmVzdGVkRGF0YT5mYWxzZTwvQmFzZS0wX0hhc05lc3RlZERhdGE+DQo8L2ExOkNhbGxTaXRlX3gwMDJCX1RyYWNlU2VyaWFsaXNlckhlbHBlcj4NCjwvU09BUC1FTlY6Qm9keT4NCjwvU09BUC1FTlY6RW52ZWxvcGU+DQo="
+      }
+    }
+  ],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.3.2.15696",
+      "RunType": "Automatic",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -40.16345008705747,
+      "EyeY": 43.510404260978923,
+      "EyeZ": 194.12334208744443,
+      "LookX": 40.16345008705747,
+      "LookY": -43.510404260978923,
+      "LookZ": -194.12334208744443,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "CAD.ReportInstances",
+        "Id": "f0ce647c48d54857b5bff3d7d72e68b0",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1041.5120344866059,
+        "Y": 311.881136896841
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "File Path",
+        "Id": "c0696475e0804ddf85384dd11cb4e881",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 544.99999999999989,
+        "Y": 311.0
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "a683ad5de45849ffb63aee92f2e0800b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 853.88783683469,
+        "Y": 536.01534101856328
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "List.LastItem",
+        "Id": "c5c7fd4b12eb43c8b437a9d0e272c941",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1369.2288879356715,
+        "Y": 472.22339140443177
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "CAD.PointsFromCADLayers",
+        "Id": "bd08f7287955475991b0c3f38bb89d5b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2037.7112552773606,
+        "Y": 462.37202946388942
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "12eace64f5c0413bbaedb84a2a391676",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1632.2283371345529,
+        "Y": 815.47904648501367
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "List.FirstItem",
+        "Id": "01ff9c565b2046d2992ba55d5c173e89",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1654.3962666810196,
+        "Y": 462.82192968524657
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "List.Count",
+        "Id": "da35ba73ed2c41ae9a32a40cb8c724d8",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2620.7819421563026,
+        "Y": 710.26705143171114
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "List.Flatten",
+        "Id": "65ee99a7c9234f6286cbac419a42ceed",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2342.7436053575479,
+        "Y": 525.8079606752558
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Topography.ByPoints",
+        "Id": "cd2c7668fe604d789bffa880c24dab8c",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2609.98433684373,
+        "Y": 853.33532182330339
+      }
+    ],
+    "Annotations": [],
+    "X": -1909.193629800169,
+    "Y": -431.92851452509103,
+    "Zoom": 1.1113575327695027
+  }
+}

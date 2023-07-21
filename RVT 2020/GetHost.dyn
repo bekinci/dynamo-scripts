@@ -1,0 +1,303 @@
+{
+  "Uuid": "36e45690-85e1-4962-a736-d0379fcb2eca",
+  "IsCustomNode": false,
+  "Description": null,
+  "Name": "GetHost",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
+      "FunctionSignature": "73663744-6035-41f3-b386-e6f91e0b36fe",
+      "FunctionType": "Graph",
+      "NodeType": "FunctionNode",
+      "Id": "575ce9c9c110424b8514186d9da735d9",
+      "Inputs": [
+        {
+          "Id": "2f30e912dbcd4623b58f46ed1dbadc2c",
+          "Name": "element",
+          "Description": "var[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "364af907037448a095814867401de986",
+          "Name": "host",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets an element's host. Unlike the OOTB node FamilyInstance.GetHost it not only works for family instances but also for elements like wall sweeps, foundations, railings, builing pads and topo subregions."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
+      "FunctionSignature": "c3ba5836-4456-4ae9-a346-781cacf6ef07",
+      "FunctionType": "Graph",
+      "NodeType": "FunctionNode",
+      "Id": "35e3a679c9854d35ac0b56f965a8bc7f",
+      "Inputs": [
+        {
+          "Id": "34e6198dc0a5495bbb9f9f86dab0d129",
+          "Name": "ElemsOrIDs",
+          "Description": "Elements or IDs\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "290441da6c8b4f53b9367628b2ca97ac",
+          "Name": "Elems",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Select elements in Revit by Element or ID"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
+      "FunctionSignature": "f153d48d-85dd-4a7e-8ba2-91b08d81e5e7",
+      "FunctionType": "Graph",
+      "NodeType": "FunctionNode",
+      "Id": "e2e0f74ad832449c8c59a793261ff37e",
+      "Inputs": [
+        {
+          "Id": "ba15d91bcb6a49359c7e658ada5cca60",
+          "Name": "refresh",
+          "Description": "bool\nDefault value : true",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "d14377452b3b43199e9da6c191021141",
+          "Name": "element(s)",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Gets the currently selected elements. Connect a boolean switch to refresh the selection."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": false,
+      "Id": "8245d614503d4ac5a977caca5efec809",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "8069ffe14b6a45868557006d74c5e4a4",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Selection between a true and false."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSVarArgFunction, DynamoCore",
+      "FunctionSignature": "DSCore.List.Join@var[]..[]",
+      "FunctionType": "VariableArgument",
+      "NodeType": "FunctionNode",
+      "Id": "572ff81da21b461bad3783d470487241",
+      "Inputs": [
+        {
+          "Id": "e8b39849c97842df81761d4147327510",
+          "Name": "list0",
+          "Description": "Lists to join into one.\n\nvar[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "d50be3e5fb474c23b070f3e3334cd492",
+          "Name": "list1",
+          "Description": "var[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "d76fe1a287984847b716a32e12531c86",
+          "Name": "list",
+          "Description": "Joined list.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Concatenates all given lists into a single list.\n\nList.Join (lists: var[]..[]): var[]..[]"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "364af907037448a095814867401de986",
+      "End": "d50be3e5fb474c23b070f3e3334cd492",
+      "Id": "f6d9a335773c42e28b1c80b071c2e69a"
+    },
+    {
+      "Start": "364af907037448a095814867401de986",
+      "End": "34e6198dc0a5495bbb9f9f86dab0d129",
+      "Id": "d2baad68a7174c0f8fbec39356d90d4e"
+    },
+    {
+      "Start": "d14377452b3b43199e9da6c191021141",
+      "End": "2f30e912dbcd4623b58f46ed1dbadc2c",
+      "Id": "824e4322d6104b4e9e5a7d4d4f450d16"
+    },
+    {
+      "Start": "d14377452b3b43199e9da6c191021141",
+      "End": "e8b39849c97842df81761d4147327510",
+      "Id": "83df9e3cf76d4df78150e34d3cc30adc"
+    },
+    {
+      "Start": "8069ffe14b6a45868557006d74c5e4a4",
+      "End": "ba15d91bcb6a49359c7e658ada5cca60",
+      "Id": "59a93d22374043b591d4ebeb9064d3ea"
+    }
+  ],
+  "Dependencies": [
+    "73663744-6035-41f3-b386-e6f91e0b36fe",
+    "c3ba5836-4456-4ae9-a346-781cacf6ef07",
+    "f153d48d-85dd-4a7e-8ba2-91b08d81e5e7"
+  ],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "Clockwork for Dynamo 2.x",
+      "Version": "2.3.0",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "575ce9c9c110424b8514186d9da735d9"
+      ]
+    },
+    {
+      "Name": "Modelical",
+      "Version": "2.2.19",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "35e3a679c9854d35ac0b56f965a8bc7f"
+      ]
+    },
+    {
+      "Name": "spring nodes",
+      "Version": "204.1.0",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "e2e0f74ad832449c8c59a793261ff37e"
+      ]
+    }
+  ],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.3.1.11775",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "Id": "575ce9c9c110424b8514186d9da735d9",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "Element.Host+",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 562.0,
+        "Y": 453.0
+      },
+      {
+        "Id": "35e3a679c9854d35ac0b56f965a8bc7f",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "SelectInRevit",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 1176.0,
+        "Y": 241.0
+      },
+      {
+        "Id": "e2e0f74ad832449c8c59a793261ff37e",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "ꟿ Collect.CurrentSelection",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 191.0,
+        "Y": 195.0
+      },
+      {
+        "Id": "8245d614503d4ac5a977caca5efec809",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "Boolean",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 210.0,
+        "Y": 82.0
+      },
+      {
+        "Id": "572ff81da21b461bad3783d470487241",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Name": "List.Join",
+        "ShowGeometry": true,
+        "Excluded": false,
+        "X": 798.30286475778666,
+        "Y": 81.932896584511468
+      }
+    ],
+    "Annotations": [],
+    "X": -294.88118285891073,
+    "Y": 333.27226701568526,
+    "Zoom": 0.5483237840945363
+  }
+}

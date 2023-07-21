@@ -1,0 +1,198 @@
+{
+  "Uuid": "5aad0aed-481d-4043-af7e-cfc56649e19b",
+  "IsCustomNode": false,
+  "Description": null,
+  "Name": "SelectBeamsDisallowJoin",
+  "ElementResolver": {
+    "ResolutionMap": {}
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Nodes.DSModelElementsSelection, DSRevitNodesUI",
+      "NodeType": "ExtensionNode",
+      "InstanceId": [
+        "d3d4cada-03e4-4a14-9db7-7dbcaf466009-019fa8db",
+        "d3d4cada-03e4-4a14-9db7-7dbcaf466009-019fa8dd",
+        "d3d4cada-03e4-4a14-9db7-7dbcaf466009-019fa8df",
+        "d3d4cada-03e4-4a14-9db7-7dbcaf466009-019fa8e3",
+        "d3d4cada-03e4-4a14-9db7-7dbcaf466009-019fa8e5",
+        "d3d4cada-03e4-4a14-9db7-7dbcaf466009-019fa8e7",
+        "d3d4cada-03e4-4a14-9db7-7dbcaf466009-019fa8ed",
+        "d3d4cada-03e4-4a14-9db7-7dbcaf466009-019fa8ef",
+        "d3d4cada-03e4-4a14-9db7-7dbcaf466009-019fa8f1",
+        "d3d4cada-03e4-4a14-9db7-7dbcaf466009-019fa8f3",
+        "d3d4cada-03e4-4a14-9db7-7dbcaf466009-019fa8f5",
+        "d3d4cada-03e4-4a14-9db7-7dbcaf466009-019fa8f7"
+      ],
+      "Id": "f02f28fb896c4eab97b0d07d3e9a54f7",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "cf0acb833ec94a3a931b9559986f32eb",
+          "Name": "Elements",
+          "Description": "The selected elements.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CustomNodes.Function, DynamoCore",
+      "FunctionSignature": "fb0de634-7de9-4530-ad44-b0604fb020c9",
+      "FunctionType": "Graph",
+      "NodeType": "FunctionNode",
+      "Id": "a44690ff89c74dc2a58a8d8dfa1c901a",
+      "Inputs": [
+        {
+          "Id": "bea52e317903444bbd16b6a7da24c179",
+          "Name": "strFraming",
+          "Description": "var[]..[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "d835966e89fc4ec7845fd74a93077eb4",
+          "Name": "TrueFalse",
+          "Description": "bool",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "55ffd7a4f9294ba99efe4e6c07d29366",
+          "Name": "strFraming",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "e1d22907e43a4e83994870ee89c6e412",
+          "Name": "State",
+          "Description": "return value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Disallow or allow join condition at Structural Framing ends (True = Disallow | False = Allow)"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "true;",
+      "Id": "764039c40c96475aad70c9da7891c9e5",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "7c6c95d4160740daa8563846102c5bdc",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "cf0acb833ec94a3a931b9559986f32eb",
+      "End": "bea52e317903444bbd16b6a7da24c179",
+      "Id": "76f4a6b73dd44e66ae7de04ed447bb9c"
+    },
+    {
+      "Start": "7c6c95d4160740daa8563846102c5bdc",
+      "End": "d835966e89fc4ec7845fd74a93077eb4",
+      "Id": "f3a0e44c2f9c4800bde5e01953ca1ae5"
+    }
+  ],
+  "Dependencies": [
+    "fb0de634-7de9-4530-ad44-b0604fb020c9"
+  ],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "Modelical",
+      "Version": "2.2.19",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "a44690ff89c74dc2a58a8d8dfa1c901a"
+      ]
+    }
+  ],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.3.1.11775",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Background Preview",
+      "EyeX": -17.0,
+      "EyeY": 24.0,
+      "EyeZ": 50.0,
+      "LookX": 12.0,
+      "LookY": -13.0,
+      "LookZ": -58.0,
+      "UpX": 0.0,
+      "UpY": 1.0,
+      "UpZ": 0.0
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Select Model Elements",
+        "Id": "f02f28fb896c4eab97b0d07d3e9a54f7",
+        "IsSetAsInput": true,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 62.0,
+        "Y": 25.5
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "DisallowAllowJoinInSTRFraming",
+        "Id": "a44690ff89c74dc2a58a8d8dfa1c901a",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 483.0,
+        "Y": 111.5
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Code Block",
+        "Id": "764039c40c96475aad70c9da7891c9e5",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 102.0,
+        "Y": 280.0
+      }
+    ],
+    "Annotations": [],
+    "X": 0.0,
+    "Y": 0.0,
+    "Zoom": 1.0
+  }
+}
